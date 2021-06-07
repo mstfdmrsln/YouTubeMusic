@@ -1,0 +1,38 @@
+{
+    "name": "YoutubeMusic",
+    "version": "2.0.0",
+    "description": "Youtube Music Desktop",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "dist": "electron-builder"
+    },
+    "repository": "https://github.com/electron/electron-quick-start",
+    "author": "Mustafa Demiraslan",
+    "license": "GPL-3.0-only",
+    "devDependencies": {
+        "electron": "^13.1.1",
+        "electron-builder": "22.10.5"
+    },
+    "build": {
+        "appId": "youtube.music",
+        "mac": {
+            "category": "public.app-category.music"
+        },
+        "asar": true,
+        "win": {
+            "icon": "yt.ico",
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": [
+                        "x64"
+                    ]
+                }
+            ]
+        }
+    },
+    "dependencies": {
+        "@electron/remote": "^1.1.0"
+    }
+}
