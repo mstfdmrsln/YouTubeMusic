@@ -7,8 +7,8 @@ function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
-    frame:false,
     height: 600,
+    frame:false,
     webPreferences: {
       devTools: true,
       nodeIntegration: true,
@@ -25,7 +25,7 @@ function createWindow () {
   mainWindow.removeMenu();
   mainWindow.webContents.userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1 Mobile/15E148 Safari/604.1";
   // and load the index.html of the app.
-  //mainWindow.loadURL('https://music.youtube.com')
+  
   mainWindow.loadFile('index.html')
   // Open the DevTools.
   //mainWindow.webContents.openDevTools()

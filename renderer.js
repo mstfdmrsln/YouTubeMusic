@@ -13,6 +13,13 @@ document.onreadystatechange = (event) => {
     if (document.readyState == "complete") {
         handleWindowControls();
     }
+
+    const webview = document.querySelector('webview')
+    webview.addEventListener('page-title-updated', (e) => {
+        const title = document.getElementById("window-title");
+        title.innerText=e.title;
+        document.title = e.title;
+    })
 };
 
 window.onbeforeunload = (event) => {

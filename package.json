@@ -1,38 +1,64 @@
 {
     "name": "YoutubeMusic",
-    "version": "2.0.0",
-    "description": "Youtube Music Desktop",
-    "main": "main.js",
+    "version": "2.1.0",
+    "description": "Youtube Music Desktop Application",
+    "main": "./main.js",
     "scripts": {
         "start": "electron .",
-        "dist": "electron-builder"
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder",
+        "dist-l": "electron-builder -l"
     },
-    "repository": "https://github.com/electron/electron-quick-start",
+    "repository": "https://github.com/mstfdmrsln/YouTubeMusic",
     "author": "Mustafa Demiraslan",
     "license": "GPL-3.0-only",
+    "dependencies": {
+        "@electron/remote": "^1.1.0"
+    },
     "devDependencies": {
         "electron": "^13.1.1",
         "electron-builder": "22.10.5"
     },
     "build": {
-        "appId": "youtube.music",
+        "appId": "com.electron.youtubemusic",
+        "productName": "YouTube Music",
         "mac": {
-            "category": "public.app-category.music"
+          "icon": "./assets/icons/app-icons/mac/icon.icns",
+          "category": "public.app-category.music"
         },
-        "asar": true,
+        "files": ["./assets/**", "./index.html", "./renderer.js", "package.json", "main.js", "./assets/css.", "./style.css"],
+        "dmg": {
+          "contents": [
+            {
+              "x": 110,
+              "y": 150
+            },
+            {
+              "x": 240,
+              "y": 150,
+              "type": "link",
+              "path": "/Applications"
+            }
+          ]
+        },
+        "linux": {
+          "icon": "./assets/icons/app-icons/png/64x64.png",
+          "target": [
+            "AppImage",
+            "deb",
+            "snap",
+            "zip"
+          ]
+        },
         "win": {
-            "icon": "yt.ico",
-            "target": [
-                {
-                    "target": "nsis",
-                    "arch": [
-                        "x64"
-                    ]
-                }
-            ]
+          "icon": "./assets/icons/app-icons/win/256x256.ico",
+          "target": "NSIS"
+        }, 
+        "nsis": {
+          "oneClick": false,
+          "createDesktopShortcut": "always",
+          "deleteAppDataOnUninstall": true,
+          "installerIcon": "./assets/icons/app-icons/win/128x128.ico"
         }
-    },
-    "dependencies": {
-        "@electron/remote": "^1.1.0"
     }
 }
