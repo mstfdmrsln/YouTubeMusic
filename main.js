@@ -1,32 +1,50 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, Tray, Menu} = require('electron')
+var KeyboarActions = require(".\\build\\Release\\windowskeyboard")
 const path = require('path')
 require('@electron/remote/main').initialize()
-
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 function createWindow () {
+  // permit multiple instances of the app
+  if (!app.requestSingleInstanceLock()) {
+    app.quit();
+  }
+  const ThumbarButtons = [
+    {
+      tooltip: "Previous",
+      icon: "assets/icons/prev.png",
+      click() { KeyboarActions.mediaprev(); }
+    },
+    {
+        tooltip: "Play / Pause",
+        icon: "assets/icons/play_pause.png",
+        click() { KeyboarActions.mediaplaypause(); }
+    },
+    {
+        tooltip: "Next",
+        icon: "assets/icons/next.png",
+        click() { KeyboarActions.medianext(); }
+    }
+  ]
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     frame:false,
     webPreferences: {
-      devTools: true,
       nodeIntegration: true,
-      enableRemoteModule: true,
-      webviewTag: true,
-      experimentalFeatures: true,
-      scrollBounce: true,
       contextIsolation: false,
-      partition: "in-mem",
-      nativeWindowOpen: true,
-      webSecurity: false
+      webviewTag: true,
+      enableRemoteModule: true,
+      nodeIntegrationInSubFrames: true
     }
   })
   mainWindow.removeMenu();
   mainWindow.webContents.userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1 Mobile/15E148 Safari/604.1";
-  // and load the index.html of the app.
-  
+  require("@electron/remote/main").enable(mainWindow.webContents)
+
   mainWindow.loadFile('index.html')
+  mainWindow.setThumbarButtons(ThumbarButtons)
   // Open the DevTools.
   //mainWindow.webContents.openDevTools()
 }

@@ -2,7 +2,13 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 const remote = require('@electron/remote');
-
+const TYPE_PREV = 1;
+const TYPE_PP = 2;
+const TYPE_NEXT = 3;
+const TYPE_VOLUME_DOWN = 4;
+const TYPE_VOLUME_MUTE = 5;
+const  TYPE_VOLUME_UP = 6;
+var KeyboarActions = require(".\\build\\Release\\windowskeyboard")
 const win = remote.getCurrentWindow(); /* Note this is different to the
 html global `window` variable */
 
@@ -16,7 +22,7 @@ document.onreadystatechange = (event) => {
 
     const webview = document.querySelector('webview')
     webview.addEventListener('page-title-updated', (e) => {
-        const title = document.getElementById("window-title");
+        const title = document.getElementById("content-title");
         title.innerText=e.title;
         document.title = e.title;
     })
@@ -31,6 +37,11 @@ window.onbeforeunload = (event) => {
 
 function handleWindowControls() {
     // Make minimise/maximise/restore/close buttons work when they are clicked
+    document.getElementById('lock-button').addEventListener("click", event => {
+        showOverlay();
+        console.log("Maximised");
+    });
+    
     document.getElementById('min-button').addEventListener("click", event => {
         win.minimize();
         console.log("Maximised");
@@ -62,4 +73,41 @@ function handleWindowControls() {
             document.body.classList.remove('maximized');
         }
     }
+}
+
+function actionmusic(type) {
+    if(type == TYPE_PREV)
+    {
+        KeyboarActions.mediaprev();
+    }
+    else if(type == TYPE_PP)
+    {
+        KeyboarActions.mediaplaypause();
+    }
+    else if(type == TYPE_NEXT)
+    {
+        KeyboarActions.medianext();
+    }
+    else if(type == TYPE_VOLUME_DOWN)
+    {
+        KeyboarActions.volumedown();
+    }
+    else if(type == TYPE_VOLUME_MUTE)
+    {
+        KeyboarActions.mute();
+    }
+    else if(type == TYPE_VOLUME_UP)
+    {
+        KeyboarActions.volumeup();
+    }
+}
+
+//display overlay element
+function showOverlay() {
+    document.getElementById("overlay").style.display = "block";
+}
+
+//hide overlay element
+function hideOverlay() {
+    document.getElementById("overlay").style.display = "none";
 }

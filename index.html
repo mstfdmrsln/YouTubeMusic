@@ -1,38 +1,107 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <link rel="stylesheet" href="style.css" />
-    <link href="assets/css/fontawesome/all.css" rel="stylesheet"> <!--load all fa styles -->
-    <link rel="stylesheet" href="assets/css/notyf.min.css">
-  </head>
-  <body>
-    <header id="titlebar">
-      <div id="drag-region">
-        <div id="window-title">
-          <span>YouTube Music</span>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <link rel="stylesheet" href="style.css" />
+  <script src="resources/jquery/jquery-3.2.1.min.js"></script>
+  <script src="resources/bootstrap/js/bootstrap.js"></script>
+
+  <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
+  <link href="assets/css/fontawesome/all.css" rel="stylesheet">
+  <!--load all fa styles -->
+  <link rel="stylesheet" href="assets/css/notyf.min.css">
+</head>
+
+<body>
+  <header id="titlebar">
+    <div id="drag-region">
+      <div id="window-title">
+        <span style="margin-left: 10px;" id="content-title" onclick="showOverlay()">YouTube Music</span>
+      </div>
+
+      <div id="window-controls">
+        
+        <div class="button" id="prev-button">
+          <img draggable="false" width="25" src="assets/icons/prev.png" alt="logo" onclick="actionmusic(1)" />
+        </div>
+        
+        <div class="button" id="playpause-button">
+          <img draggable="false" width="25" src="assets/icons/play_pause.png" alt="logo" onclick="actionmusic(2)" />
+        </div>
+        
+        <div class="button" id="next-button">
+          <img draggable="false" width="25" src="assets/icons/next.png" alt="logo" onclick="actionmusic(3)" />
+        </div>
+        
+        <div class="button" id="lock-button"  onclick="showOverlay()">
+          <span><i class="fa fa-lock text-secondary" style="font-size: 1.4em;"></i></span>
         </div>
 
-        <div id="window-controls">
-          <div class="button" id="min-button">
-            <img class="icon" srcset="assets/icons/min-w-10.png 1x, assets/icons/min-w-12.png 1.25x, assets/icons/min-w-15.png 1.5x, assets/icons/min-w-15.png 1.75x, assets/icons/min-w-20.png 2x, assets/icons/min-w-20.png 2.25x, assets/icons/min-w-24.png 2.5x, assets/icons/min-w-30.png 3x, assets/icons/min-w-30.png 3.5x" draggable="false" />
-          </div>
-          <div class="button" id="max-button">
-            <img class="icon" srcset="assets/icons/max-w-10.png 1x, assets/icons/max-w-12.png 1.25x, assets/icons/max-w-15.png 1.5x, assets/icons/max-w-15.png 1.75x, assets/icons/max-w-20.png 2x, assets/icons/max-w-20.png 2.25x, assets/icons/max-w-24.png 2.5x, assets/icons/max-w-30.png 3x, assets/icons/max-w-30.png 3.5x" draggable="false" />
-          </div>
-          <div class="button" id="restore-button">
-            <img class="icon" srcset="assets/icons/restore-w-10.png 1x, assets/icons/restore-w-12.png 1.25x, assets/icons/restore-w-15.png 1.5x, assets/icons/restore-w-15.png 1.75x, assets/icons/restore-w-20.png 2x, assets/icons/restore-w-20.png 2.25x, assets/icons/restore-w-24.png 2.5x, assets/icons/restore-w-30.png 3x, assets/icons/restore-w-30.png 3.5x" draggable="false" />
-          </div>
-          <div class="button" id="close-button">
-            <img class="icon" srcset="assets/icons/close-w-10.png 1x, assets/icons/close-w-12.png 1.25x, assets/icons/close-w-15.png 1.5x, assets/icons/close-w-15.png 1.75x, assets/icons/close-w-20.png 2x, assets/icons/close-w-20.png 2.25x, assets/icons/close-w-24.png 2.5x, assets/icons/close-w-30.png 3x, assets/icons/close-w-30.png 3.5x" draggable="false" />
-          </div>
+        <div class="button" id="min-button">
+          <img class="icon"
+            srcset="assets/icons/min-w-10.png 1x, assets/icons/min-w-12.png 1.25x, assets/icons/min-w-15.png 1.5x, assets/icons/min-w-15.png 1.75x, assets/icons/min-w-20.png 2x, assets/icons/min-w-20.png 2.25x, assets/icons/min-w-24.png 2.5x, assets/icons/min-w-30.png 3x, assets/icons/min-w-30.png 3.5x"
+            draggable="false" />
+        </div>
+        <div class="button" id="max-button">
+          <img class="icon"
+            srcset="assets/icons/max-w-10.png 1x, assets/icons/max-w-12.png 1.25x, assets/icons/max-w-15.png 1.5x, assets/icons/max-w-15.png 1.75x, assets/icons/max-w-20.png 2x, assets/icons/max-w-20.png 2.25x, assets/icons/max-w-24.png 2.5x, assets/icons/max-w-30.png 3x, assets/icons/max-w-30.png 3.5x"
+            draggable="false" />
+        </div>
+        <div class="button" id="restore-button">
+          <img class="icon"
+            srcset="assets/icons/restore-w-10.png 1x, assets/icons/restore-w-12.png 1.25x, assets/icons/restore-w-15.png 1.5x, assets/icons/restore-w-15.png 1.75x, assets/icons/restore-w-20.png 2x, assets/icons/restore-w-20.png 2.25x, assets/icons/restore-w-24.png 2.5x, assets/icons/restore-w-30.png 3x, assets/icons/restore-w-30.png 3.5x"
+            draggable="false" />
+        </div>
+        <div class="button" id="close-button">
+          <img class="icon"
+            srcset="assets/icons/close-w-10.png 1x, assets/icons/close-w-12.png 1.25x, assets/icons/close-w-15.png 1.5x, assets/icons/close-w-15.png 1.75x, assets/icons/close-w-20.png 2x, assets/icons/close-w-20.png 2.25x, assets/icons/close-w-24.png 2.5x, assets/icons/close-w-30.png 3x, assets/icons/close-w-30.png 3.5x"
+            draggable="false" />
+        </div>
 
+      </div>
+    </div>
+  </header>
+  <div id="overlay" style="display: none;">
+    
+    <div id="overlay-close" style="text-align: right;padding-right: 10px;padding-top: 10px;"> <span onclick="hideOverlay()"><i class="fa fa-times fa-2x text-danger"></i></span></div>
+    <div class="center-of-page">
+      <div class="row" style="text-align: center;">
+        <div class="col pull-right">
+          <img style="user-select: none;" width="100" src="assets/icons/prev.png" draggable="false" alt="logo" onclick="actionmusic(1)" />
+        </div>
+        <div class="col">
+          <img style="user-select: none;" width="100" src="assets/icons/play_pause.png" draggable="false" alt="logo" onclick="actionmusic(2)" />
+        </div>
+        <div class="col pull-left">
+          <img style="user-select: none;" width="100" src="assets/icons/next.png" draggable="false" alt="logo" onclick="actionmusic(3)" />
         </div>
       </div>
-    </header>
-    
-    <webview class="webview" src="https://music.youtube.com" useragent="Mozilla/5.0 (Windows NT 10.0; WOW64; rv:70.0) Gecko/20100101 Firefox/70.0" style="padding-top: 32px;height: 100%;"></webview>
-    <script src="./renderer.js"></script>
-  </body>
+      <div class="row" style="text-align: center;margin-top: 10rem!important;">
+
+        <div class="col pull-right">
+          <img style="user-select: none;" width="40" src="assets/icons/volumedown.png" draggable="false" alt="logo" onclick="actionmusic(4)" />
+        </div>
+        <div class="col">
+          <img style="user-select: none;" width="40" src="assets/icons/mute.png" draggable="false" alt="logo" onclick="actionmusic(5)" />
+        </div>
+        <div class="col pull-left">
+          <img style="user-select: none;" width="40" src="assets/icons/volumeup.png" draggable="false" alt="logo" onclick="actionmusic(6)" />
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <webview class="webview" src="https://music.youtube.com"
+    useragent="Mozilla/5.0 (Windows NT 10.0; WOW64; rv:70.0) Gecko/20100101 Firefox/70.0"
+    style="padding-top: 32px;height: 100%;"></webview>
+    <script>
+      window.$ = window.jQuery = require('./resources/jquery/jquery-3.2.1.min.js');
+  </script>
+  <script src="./renderer.js"></script>
+</body>
+
 </html>
