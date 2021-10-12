@@ -4,6 +4,7 @@ var KeyboarActions = require(".\\build\\Release\\windowskeyboard")
 const path = require('path')
 require('@electron/remote/main').initialize()
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+
 function createWindow () {
   // permit multiple instances of the app
   if (!app.requestSingleInstanceLock()) {

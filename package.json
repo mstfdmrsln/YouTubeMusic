@@ -1,74 +1,85 @@
 {
-    "name": "YoutubeMusic",
-    "version": "2.2.1",
-    "description": "Youtube Music Desktop Application",
-    "main": "./main.js",
-    "gypfile": true,
-    "scripts": {
-        "postinstall": "electron-builder install-app-deps && node_modules\\.bin\\electron-rebuild --module-dir .",
-        "build": "node-gyp rebuild",
-        "clean": "node-gyp clean",
-        "start": "electron .",
-        "pack": "electron-builder --dir",
-        "dist": "electron-builder",
-        "dist-l": "electron-builder -l",
-        "update": "npm i -g npm-check-updates && ncu -u && yarn install"
+  "name": "YoutubeMusic",
+  "version": "2.2.3",
+  "description": "Youtube Music Desktop Application",
+  "main": "./main.js",
+  "gypfile": true,
+  "scripts": {
+    "postinstall": "electron-builder install-app-deps && node_modules\\.bin\\electron-rebuild --module-dir .",
+    "build": "node-gyp rebuild",
+    "clean": "node-gyp clean",
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dist-l": "electron-builder -l",
+    "update": "npm i -g npm-check-updates && ncu -u && yarn install"
+  },
+  "repository": "https://github.com/mstfdmrsln/YouTubeMusic",
+  "author": "Mustafa Demiraslan",
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "@electron/remote": "^2.0.1",
+    "bindings": "^1.5.0",
+    "nan": "2.15.0",
+    "node-addon-api": "^4.2.0",
+    "node-notifier": "^10.0.0"
+  },
+  "devDependencies": {
+    "electron": "^15.1.2",
+    "electron-builder": "22.13.1",
+    "electron-rebuild": "3.2.3",
+    "node-gyp": "^8.2.0"
+  },
+  "build": {
+    "appId": "com.electron.youtubemusic",
+    "productName": "YouTube Music",
+    "mac": {
+      "icon": "./assets/icons/app-icons/mac/icon.icns",
+      "category": "public.app-category.music"
     },
-    "repository": "https://github.com/mstfdmrsln/YouTubeMusic",
-    "author": "Mustafa Demiraslan",
-    "license": "GPL-3.0-only",
-    "dependencies": {
-        "@electron/remote": "^2.0.1",
-        "bindings": "^1.5.0",
-        "nan": "2.15.0",
-        "node-addon-api": "^4.2.0"
-    },
-    "devDependencies": {
-        "electron": "^15.1.1",
-        "electron-builder": "22.11.7",
-        "electron-rebuild": "3.2.3",
-        "node-gyp": "^8.2.0"
-    },
-    "build": {
-        "appId": "com.electron.youtubemusic",
-        "productName": "YouTube Music",
-        "mac": {
-          "icon": "./assets/icons/app-icons/mac/icon.icns",
-          "category": "public.app-category.music"
+    "files": [
+      "./resources/**",
+      "./build/**",
+      "./assets/**",
+      "./index.html",
+      "./renderer.js",
+      "package.json",
+      "main.js",
+      "./assets/css.",
+      "./style.css"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
         },
-        "files": ["./resources/**","./build/**","./assets/**", "./index.html", "./renderer.js", "package.json", "main.js", "./assets/css.", "./style.css"],
-        "dmg": {
-          "contents": [
-            {
-              "x": 110,
-              "y": 150
-            },
-            {
-              "x": 240,
-              "y": 150,
-              "type": "link",
-              "path": "/Applications"
-            }
-          ]
-        },
-        "linux": {
-          "icon": "./assets/icons/app-icons/png/64x64.png",
-          "target": [
-            "AppImage",
-            "deb",
-            "snap",
-            "zip"
-          ]
-        },
-        "win": {
-          "icon": "./assets/icons/app-icons/win/256x256.ico",
-          "target": "NSIS"
-        }, 
-        "nsis": {
-          "oneClick": false,
-          "createDesktopShortcut": "always",
-          "deleteAppDataOnUninstall": true,
-          "installerIcon": "./assets/icons/app-icons/win/128x128.ico"
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
         }
+      ]
+    },
+    "linux": {
+      "icon": "./assets/icons/app-icons/png/64x64.png",
+      "target": [
+        "AppImage",
+        "deb",
+        "snap",
+        "zip"
+      ]
+    },
+    "win": {
+      "icon": "./assets/icons/app-icons/win/256x256.ico",
+      "target": "NSIS"
+    },
+    "nsis": {
+      "oneClick": false,
+      "createDesktopShortcut": "always",
+      "deleteAppDataOnUninstall": true,
+      "installerIcon": "./assets/icons/app-icons/win/128x128.ico"
     }
+  }
 }

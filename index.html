@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="style.css" />
   <script src="resources/jquery/jquery-3.2.1.min.js"></script>
   <script src="resources/bootstrap/js/bootstrap.js"></script>
+  <script src="resources/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="resources/jquery/popper.min.js"></script>
+
 
   <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
   <link href="assets/css/fontawesome/all.css" rel="stylesheet">
@@ -22,20 +25,33 @@
       </div>
 
       <div id="window-controls">
-        
-        <div class="button" id="prev-button">
-          <img draggable="false" width="25" src="assets/icons/prev.png" alt="logo" onclick="actionmusic(1)" />
+        <div class="button" id="switch-button" style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom"
+          title="Switch to Youtube">
+          <img draggable="false" width="25" src="assets/icons/app-icons/yt.png" alt="logo" onclick="switchApp()" />
         </div>
-        
-        <div class="button" id="playpause-button">
-          <img draggable="false" width="25" src="assets/icons/play_pause.png" alt="logo" onclick="actionmusic(2)" />
+
+        <div class="button" id="settings-button" style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom"
+          title="Application Settings">
+          <img draggable="false" width="25" src="assets/icons/settings.png" alt="logo" onclick="displaySettings()" />
         </div>
-        
-        <div class="button" id="next-button">
-          <img draggable="false" width="25" src="assets/icons/next.png" alt="logo" onclick="actionmusic(3)" />
+
+        <div class="button" id="prev-button" style="cursor: pointer;">
+          <img draggable="false" width="25" src="assets/icons/prev.png" alt="logo" onclick="actionmusic(1)"
+            data-toggle="tooltip" data-placement="bottom" title="Previous" />
         </div>
-        
-        <div class="button" id="lock-button"  onclick="showOverlay()">
+
+        <div class="button" id="playpause-button" style="cursor: pointer;">
+          <img draggable="false" width="25" src="assets/icons/play_pause.png" alt="logo" onclick="actionmusic(2)"
+            data-toggle="tooltip" data-placement="bottom" title="Play/Pause" />
+        </div>
+
+        <div class="button" id="next-button" style="cursor: pointer;">
+          <img draggable="false" width="25" src="assets/icons/next.png" alt="logo" onclick="actionmusic(3)"
+            data-toggle="tooltip" data-placement="bottom" title="Next" />
+        </div>
+
+        <div class="button" id="lock-button" onclick="showOverlay()" style="cursor: pointer;" data-toggle="tooltip"
+          data-placement="bottom" title="Show Media Buttons">
           <span><i class="fa fa-lock text-secondary" style="font-size: 1.4em;"></i></span>
         </div>
 
@@ -63,43 +79,82 @@
       </div>
     </div>
   </header>
+  <!--add settings popup-->
+  <div id="settings-popup" class="popup" style="display: none;">
+    <div class="popup-content">
+      <div class="popup-header">
+        <span class="popup-title">Settings</span>
+        <span class="popup-close" onclick="closeSettings()"><i class="fa fa-times"></i></span>
+      </div>
+      <div class="popup-body">
+        <div class="form-group">
+          <div class="row" style="align-items: center;">
+            <div class="col">
+              <label for="app-notifications">Notifications Enabled</label>
+            </div>
+            <div class="col">
+              <label class="switch">
+                <input type="checkbox" id="app-notifications">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+          <div class="row" style="align-items: center;" hidden>
+            <div class="col">
+              <label for="theme">Dark Theme</label>
+            </div>
+            <div class="col">
+              <label class="switch">
+                <input type="checkbox" id="theme">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div id="overlay" style="display: none;">
-    
-    <div id="overlay-close" style="text-align: right;padding-right: 10px;padding-top: 10px;"> <span onclick="hideOverlay()"><i class="fa fa-times fa-2x text-danger" style="border: 1px solid #6c151e;padding: 2px;border-radius: 10%;background-color: black;"></i></span></div>
+    <div id="overlay-close" style="text-align: right;padding-right: 10px;padding-top: 10px;"> <span
+        onclick="hideOverlay()"><i class="fa fa-times fa-2x text-danger"
+          style="border: 1px solid #6c151e;padding: 2px;border-radius: 10%;background-color: black;"></i></span></div>
     <div class="center-of-page">
       <div class="row" style="text-align: center;">
         <div class="col pull-right">
-          <img style="user-select: none;" width="100" src="assets/icons/prev.png" draggable="false" alt="logo" onclick="actionmusic(1)" />
+          <img style="user-select: none;" width="100" src="assets/icons/prev.png" draggable="false" alt="logo"
+            onclick="actionmusic(1)" />
         </div>
         <div class="col">
-          <img style="user-select: none;" width="100" src="assets/icons/play_pause.png" draggable="false" alt="logo" onclick="actionmusic(2)" />
+          <img style="user-select: none;" width="100" src="assets/icons/play_pause.png" draggable="false" alt="logo"
+            onclick="actionmusic(2)" />
         </div>
         <div class="col pull-left">
-          <img style="user-select: none;" width="100" src="assets/icons/next.png" draggable="false" alt="logo" onclick="actionmusic(3)" />
+          <img style="user-select: none;" width="100" src="assets/icons/next.png" draggable="false" alt="logo"
+            onclick="actionmusic(3)" />
         </div>
       </div>
       <div class="row" style="text-align: center;margin-top: 10rem!important;">
 
         <div class="col pull-right">
-          <img style="user-select: none;" width="40" src="assets/icons/volumedown.png" draggable="false" alt="logo" onclick="actionmusic(4)" />
+          <img style="user-select: none;" width="40" src="assets/icons/volumedown.png" draggable="false" alt="logo"
+            onclick="actionmusic(4)" />
         </div>
         <div class="col">
-          <img style="user-select: none;" width="40" src="assets/icons/mute.png" draggable="false" alt="logo" onclick="actionmusic(5)" />
+          <img style="user-select: none;" width="40" src="assets/icons/mute.png" draggable="false" alt="logo"
+            onclick="actionmusic(5)" />
         </div>
         <div class="col pull-left">
-          <img style="user-select: none;" width="40" src="assets/icons/volumeup.png" draggable="false" alt="logo" onclick="actionmusic(6)" />
+          <img style="user-select: none;" width="40" src="assets/icons/volumeup.png" draggable="false" alt="logo"
+            onclick="actionmusic(6)" />
         </div>
 
       </div>
     </div>
   </div>
 
-
-  <webview class="webview" src="https://music.youtube.com"
-    useragent="Mozilla/5.0 (Windows NT 10.0; WOW64; rv:70.0) Gecko/20100101 Firefox/70.0"
-    style="padding-top: 32px;height: 100%;"></webview>
-    <script>
-      window.$ = window.jQuery = require('./resources/jquery/jquery-3.2.1.min.js');
+  <div class="webview" id="webviewarea"></div>
+  <script>
+    window.$ = window.jQuery = require('./resources/jquery/jquery-3.2.1.min.js');
   </script>
   <script src="./renderer.js"></script>
 </body>
