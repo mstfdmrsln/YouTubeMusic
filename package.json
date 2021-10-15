@@ -1,6 +1,6 @@
 {
   "name": "YoutubeMusic",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Youtube Music Desktop Application",
   "main": "./main.js",
   "gypfile": true,
@@ -25,7 +25,7 @@
     "node-notifier": "^10.0.0"
   },
   "devDependencies": {
-    "electron": "^15.1.2",
+    "electron": "^15.2.0",
     "electron-builder": "22.13.1",
     "electron-rebuild": "3.2.3",
     "node-gyp": "^8.2.0"
