@@ -41,7 +41,7 @@ function createWindow () {
     }
   })
   mainWindow.removeMenu();
-  mainWindow.webContents.userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1 Mobile/15E148 Safari/604.1";
+  mainWindow.webContents.userAgent = "Mozilla/5.0 (Windows NT 10.0; rv:74.0) Gecko/20100101 Firefox/74.0";
   require("@electron/remote/main").enable(mainWindow.webContents)
 
   mainWindow.loadFile('index.html')

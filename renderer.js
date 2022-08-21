@@ -167,7 +167,7 @@ function displayYoutube() {
         currentApp = APP_YT;
         document.getElementById("switch-button").innerHTML = `<img draggable="false" width="25" src="assets/icons/app-icons/yt-disabled.png" alt="logo"/>`;
         document.getElementById("webviewarea").innerHTML = `<webview id="webview" class="webview" src="https://www.youtube.com"
-                useragent="Mozilla/5.0 (Windows NT 10.0; WOW64; rv:70.0) Gecko/20100101 Firefox/70.0"
+                useragent="Mozilla/5.0 (Windows NT 10.0; rv:74.0) Gecko/20100101 Firefox/74.0"
                 style="padding-top: 32px;height: 100%;" allowpopups></webview>`;
         initNotificationSettings();
         let wv = document.querySelector('webview');
@@ -189,7 +189,7 @@ function displayMusic() {
         currentApp = APP_YTMUSIC;
         document.getElementById("switch-button").innerHTML = `<img draggable="false" width="25" src="assets/icons/app-icons/png/48x48-disabled.png" alt="logo"/>`;
         document.getElementById("webviewarea").innerHTML = `<webview id="webview" class="webview" src="https://music.youtube.com"
-        useragent="Mozilla/5.0 (Windows NT 10.0; WOW64; rv:70.0) Gecko/20100101 Firefox/70.0"
+        useragent="Mozilla/5.0 (Windows NT 10.0; rv:74.0) Gecko/20100101 Firefox/74.0"
         style="padding-top: 32px;height: 100%;" allowpopups></webview>`;
         initNotificationSettings();
         let wv = document.querySelector('webview');
